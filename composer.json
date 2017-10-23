@@ -1,0 +1,22 @@
+{
+    "name": "pixelfederation/phystrix-redis",
+    "description": "Redis storage implementation for Phystrix (https://github.com/upwork/phystrix)",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Štefan Peťovský",
+            "email": "spetovsky@pixelfederation.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PixelFederation\\Phystrix\\Storage\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "odesk/phystrix": "~1.0",
+        "predis/predis": "^1.1"
+    }
+}
