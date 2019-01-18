@@ -40,6 +40,7 @@ final class RedisStateStorage implements StateStorageInterface
 {
     private const BUCKET_EXPIRE_SECONDS = 120;
     private const BUCKET_KEY_FORMAT = 'phystrix_bucket:%s_%s_%s';
+    private const CIRCUIT_EXPIRE_SECONDS = 86400;
     private const CIRCUIT_OPEN_KEY_FORMAT = 'phystrix_circuit_open:%s';
     private const CIRCUIT_TEST_KEY_FORMAT = 'phystrix_circuit_test:%s';
 
@@ -62,7 +63,14 @@ final class RedisStateStorage implements StateStorageInterface
     public function incrementBucket($commandKey, $type, $index): void
     {
         $key = $this->getBucketKey($commandKey, $type, $index);
+        if (!$this->redis->exists($key)) {
+            $this->redis->setex($key, self::BUCKET_EXPIRE_SECONDS, 1);
+            return;
+        }
+
         $this->redis->incr($key);
+        $this->redis->expire($key, self::BUCKET_EXPIRE_SECONDS);
+
     }
 
     /**
@@ -95,7 +103,7 @@ final class RedisStateStorage implements StateStorageInterface
         $openKey = $this->getCircuitOpenKey($commandKey);
         $testKey = $this->getCircuitTestKey($commandKey);
 
-        $this->redis->set($openKey, true);
+        $this->redis->setex($openKey, self::CIRCUIT_EXPIRE_SECONDS, true);
 
         $sleepingWindowInSeconds = ceil($sleepingWindowInMilliseconds / 1000);
         $this->redis->setex($testKey, $sleepingWindowInSeconds, true);
@@ -107,7 +115,7 @@ final class RedisStateStorage implements StateStorageInterface
     public function closeCircuit($commandKey): void
     {
         $key = $this->getCircuitOpenKey($commandKey);
-        $this->redis->set($key, false);
+        $this->redis->del([$key]);
     }
 
     /**
@@ -116,8 +124,12 @@ final class RedisStateStorage implements StateStorageInterface
     public function isCircuitOpen($commandKey): bool
     {
         $key = $this->getCircuitOpenKey($commandKey);
+        $value = $this->redis->get($key);
+        if ($value === null) {
+            return false;
+        }
 
-        return (bool) $this->redis->get($key);
+        return (bool)$value;
     }
 
     /**
