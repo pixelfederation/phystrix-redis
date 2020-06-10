@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b299f48fa672d4db024a2a68cab1d42",
+    "content-hash": "13be12a24b10fb95b8ab7123533873f9",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -35,20 +35,21 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
+            "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
             "name": "odesk/phystrix",
-            "version": "v1.2.0",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/upwork/phystrix.git",
-                "reference": "9c6d0a210f289d56f9ae5b69ca22ac15c3c26571"
+                "reference": "c8ac8984e3ac754e733ac6cf3f109eeb75bf66e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/upwork/phystrix/zipball/9c6d0a210f289d56f9ae5b69ca22ac15c3c26571",
-                "reference": "9c6d0a210f289d56f9ae5b69ca22ac15c3c26571",
+                "url": "https://api.github.com/repos/upwork/phystrix/zipball/c8ac8984e3ac754e733ac6cf3f109eeb75bf66e9",
+                "reference": "c8ac8984e3ac754e733ac6cf3f109eeb75bf66e9",
                 "shasum": ""
             },
             "require": {
@@ -60,6 +61,11 @@
                 "phpunit/phpunit": "~4.2"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Odesk\\": "library/"
@@ -74,7 +80,7 @@
                 "odesk",
                 "phystrix"
             ],
-            "time": "2015-09-10T18:02:49+00:00"
+            "time": "2017-08-02T04:23:25+00:00"
         },
         {
             "name": "predis/predis",
@@ -226,6 +232,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2017-07-23T13:06:00+00:00"
         },
         {
@@ -282,6 +289,7 @@
                 "config",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-config",
             "time": "2016-02-04T23:01:10+00:00"
         },
         {
@@ -329,6 +337,7 @@
                 "di",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-di",
             "time": "2016-04-25T20:58:11+00:00"
         },
         {
@@ -383,6 +392,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2017-07-11T19:17:22+00:00"
         },
         {
@@ -428,6 +438,7 @@
                 "stdlib",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-stdlib",
             "time": "2016-09-13T14:38:50+00:00"
         }
     ],
